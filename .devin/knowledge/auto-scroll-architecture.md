@@ -8,8 +8,7 @@ Auto Scroll is a Manifest V3 Chrome extension. The source lives in `src/` and th
 - `src/scroll-api.js` creates a single `window.__autoScrollExtAPI` object via `createScrollController` from `src/lib/scroll.js`.
 - `src/popup.js` then calls `window.__autoScrollExtAPI.start(speed)`, `stop()`, `setSpeed(speed)`, or `getStatus()` to control scrolling.
 - `src/background.js` (service worker) listens for the `toggle-auto-scroll` command and calls the same API on the active tab.
-- `src/lib/storage.js` persists speed and license data in `chrome.storage.local`.
-- `src/lib/license.js` is currently a stub that accepts any non-empty key; real validation should be added in Phase 2.
+- `src/lib/storage.js` persists the user-selected speed in `chrome.storage.local`.
 
 ## Build and test
 - `npm run build` bundles `src/*.js` into `dist/` and copies static files from `src/` plus `icons/`.

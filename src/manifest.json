@@ -29,8 +29,7 @@
         "mac": "Command+Shift+S"
       },
       "description": "Start or stop auto scroll"
-    },
-
+    }
   },
   "web_accessible_resources": [
     {
