@@ -66,6 +66,7 @@ export function createScrollController(window, document, options = {}) {
     target: null,
     carry: 0,
     rafId: null,
+    lastTime: 0,
   };
 
   function getStatus() {
@@ -86,7 +87,7 @@ export function createScrollController(window, document, options = {}) {
       el === document.scrollingElement;
 
     if (isDoc) {
-      const cur = window.scrollY || el.scrollTop || 0;
+      const cur = el.scrollTop || window.scrollY || 0;
       if (cur >= max - 1) {
         window.scrollTo(0, 0);
         el.scrollTop = 0;
@@ -108,19 +109,24 @@ export function createScrollController(window, document, options = {}) {
     return true;
   }
 
-  function tick() {
+  function tick(now = performance.now()) {
     if (!state.running) return;
 
     state.rafId = rAF(tick);
 
-    if (!state.target || !document.contains(state.target)) {
-      state.target = findScrollTarget(window, document);
+    const dt = Math.min((now - state.lastTime) / 1000, 0.1);
+    if (dt > 0) {
+      state.lastTime = now;
+      state.carry += pixelsPerSecond(state.speed) * dt;
     }
 
-    state.carry += pixelsPerFrame(state.speed);
     const whole = Math.floor(state.carry);
     if (whole < 1) return;
     state.carry -= whole;
+
+    if (!state.target || !document.contains(state.target)) {
+      state.target = findScrollTarget(window, document);
+    }
 
     if (!step(state.target, whole)) {
       state.target = findScrollTarget(window, document);
@@ -140,6 +146,7 @@ export function createScrollController(window, document, options = {}) {
 
     state.speed = speed;
     state.carry = 0;
+    state.lastTime = performance.now();
     state.target = findScrollTarget(window, document);
 
     if (getMaxScroll(state.target) <= 0) {

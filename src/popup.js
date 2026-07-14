@@ -68,8 +68,12 @@ async function shareExtension() {
       await navigator.clipboard.writeText(url);
       setStatus("Link copied to clipboard", "info");
     }
-  } catch {
-    // User cancelled share or the browser does not support sharing.
+  } catch (err) {
+    if (err.name === "NotAllowedError") {
+      setStatus("Clipboard permission denied. Try copying manually.", "error");
+    } else if (err.name !== "AbortError") {
+      setStatus("Couldn’t share the extension. Try copying the link manually.", "error");
+    }
   }
 }
 

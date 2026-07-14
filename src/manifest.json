@@ -31,10 +31,5 @@
       "description": "Start or stop auto scroll"
     }
   },
-  "web_accessible_resources": [
-    {
-      "resources": ["scroll-api.js"],
-      "matches": ["http://*/*", "https://*/*"]
-    }
-  ]
+  "web_accessible_resources": []
 }
