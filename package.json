@@ -1,0 +1,25 @@
+{
+  "name": "auto-scroll",
+  "version": "1.2.0",
+  "description": "Automatically scroll down a page. Control speed from the popup. Loops back to the top.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "zip": "node scripts/build.js zip",
+    "lint": "eslint src scripts test",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "eslint": "^9.39.0",
+    "globals": "^15.0.0",
+    "jsdom": "^24.0.0",
+    "jszip": "^3.10.0",
+    "vitest": "^3.0.0"
+  },
+  "volta": {
+    "node": "20.18.1"
+  }
+}

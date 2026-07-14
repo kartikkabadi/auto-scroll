@@ -5,3 +5,7 @@ Thumbs.db
 .vscode/
 *.swp
 *~
+node_modules/
+dist/
+dist.zip
+.eslintcache
