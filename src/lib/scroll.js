@@ -66,7 +66,6 @@ export function createScrollController(window, document, options = {}) {
     target: null,
     carry: 0,
     rafId: null,
-    licensed: false,
   };
 
   function getStatus() {
@@ -74,7 +73,6 @@ export function createScrollController(window, document, options = {}) {
       ok: true,
       running: state.running,
       speed: state.speed,
-      licensed: state.licensed,
     };
   }
 
@@ -137,12 +135,18 @@ export function createScrollController(window, document, options = {}) {
     }
 
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return { ...getStatus(), running: false, error: "Reduced motion is enabled." };
+      return { ok: false, running: false, speed: state.speed, error: "Reduced motion is enabled." };
+    }
+
+    state.speed = speed;
+    state.carry = 0;
+    state.target = findScrollTarget(window, document);
+
+    if (getMaxScroll(state.target) <= 0) {
+      return { ok: false, running: false, speed: state.speed, error: "Nothing to scroll on this page." };
     }
 
     state.running = true;
-    state.speed = speed;
-    state.target = findScrollTarget(window, document);
     state.rafId = rAF(tick);
     return getStatus();
   }

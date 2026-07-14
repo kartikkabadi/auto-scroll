@@ -28,27 +28,3 @@ export function setSpeed(speed) {
     storage.set({ speed }, resolve);
   });
 }
-
-export function getLicense() {
-  return new Promise((resolve) => {
-    const storage = getStorage();
-    if (!storage) {
-      resolve(null);
-      return;
-    }
-    storage.get(["license"], (result) => {
-      resolve(result.license ?? null);
-    });
-  });
-}
-
-export function setLicense(license) {
-  return new Promise((resolve) => {
-    const storage = getStorage();
-    if (!storage) {
-      resolve();
-      return;
-    }
-    storage.set({ license }, resolve);
-  });
-}

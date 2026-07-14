@@ -9,7 +9,8 @@
     "zip": "node scripts/build.js zip",
     "lint": "eslint src scripts test",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "manual": "python3 -m http.server 8000 --directory test/manual"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

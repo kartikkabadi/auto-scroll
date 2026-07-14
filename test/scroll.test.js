@@ -89,7 +89,6 @@ describe("createScrollController", () => {
       ok: true,
       running: false,
       speed: 6,
-      licensed: false,
     });
 
     controller.start(10);
