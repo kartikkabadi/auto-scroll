@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Auto Scroll",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Automatically scroll down a page. Control speed from the popup. Loops back to the top.",
   "action": {
     "default_popup": "popup.html",
@@ -17,6 +17,19 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["http://*/*", "https://*/*"]
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "toggle-auto-scroll": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Start or stop auto scroll"
+    }
+  },
+  "web_accessible_resources": []
 }
