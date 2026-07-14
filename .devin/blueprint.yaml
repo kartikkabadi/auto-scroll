@@ -1,3 +1,16 @@
-initialize:
+initialize: |
+  # Node is provided by the environment; no system-level setup required.
+
+maintenance:
   - run: npm install
   - run: npm run build
+
+knowledge:
+  - name: lint
+    contents: npm run lint
+  - name: test
+    contents: npm run test
+  - name: build
+    contents: npm run build
+  - name: zip
+    contents: npm run zip
