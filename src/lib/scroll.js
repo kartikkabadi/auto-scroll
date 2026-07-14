@@ -167,11 +167,9 @@ export function createScrollController(window, document, options = {}) {
 
   function toggle() {
     if (state.running) {
-      stop();
-    } else {
-      start(state.speed);
+      return stop();
     }
-    return getStatus();
+    return start(state.speed);
   }
 
   return { start, stop, setSpeed, getStatus, toggle };
